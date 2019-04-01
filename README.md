@@ -7,3 +7,5 @@ Main technologies- html, css, javascript, pixijs
 Problems- The problems I’ll be facing will be more about the contents on the board. I might have a problem with different resolutions.I also might have a problem with multiplayer option if I have time to implement it.
 
 Solutions- The different resolutions can be solved if I create a flex display and determine the size of the event squares with how much space it has. The other displays that appear will have to appear above the board. 
+
+![alt text](/wireframe.jpg "Wireframe")
