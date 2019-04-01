@@ -8,4 +8,4 @@ Problems- The problems I’ll be facing will be more about the contents on the b
 
 Solutions- The different resolutions can be solved if I create a flex display and determine the size of the event squares with how much space it has. The other displays that appear will have to appear above the board. 
 
-![alt text](/wireframe.png "Wireframe")
+![alt text](/wireframe.jpg "Wireframe")
