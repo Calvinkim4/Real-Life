@@ -10,11 +10,6 @@ h1 {
 	color: #E8FCCF;
 }
 
-h2 {
-	font-size: 50px;
-	color: #E8FCCF;
-}
-
 #start-button {
 	font-family: 'Diplomata SC', cursive;
 	/*font-family: 'Tangerine', cursive;*/
@@ -35,14 +30,66 @@ h2 {
 	color: #96E072;
 }
 
-#board-container {
+section {
+	display: none;
+	font-family: 'Tangerine', cursive;
+}
+
+section > h2 {
+	font-size: 100px;
+	color: #E8FCCF;
+
+}
+
+section > h3 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 20px;
+	font-size: 50px;
+	color: #E8FCCF;
+}
+
+section > div {
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+div > input {
+	width: 400px;
+	height: 50px;
+	font-size: 40px;
+	text-align: center;
+	font-family: 'Diplomata SC', cursive;
+}
+
+div > input:focus {
+	background-color: #E0E0E0;
+}
+
+section > button {
+	width: 200px;
+	height: 55px;
+	margin-top: 30px;
+	border: 10px solid black;
+	font-size: 20px;
+	font-family: 'Diplomata SC', cursive;
+}
+
+section > button:active {
+	background-color: black;
+	color: white;
+}
+
+/*#board-container {
 	display: grid;
 	width: 100%;
 	padding-top: 100%;
 	grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 	grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 	border: 2px solid black;
-}
+}*/
 
 /*#top-board {
 	top: 0;
