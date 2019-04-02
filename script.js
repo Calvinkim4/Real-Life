@@ -1,8 +1,8 @@
-let startButton = document.getElementById('start-button');
-startButton.addEventListener('click', function() {
-	document.querySelector('header').style.display = 'none';
-	document.querySelector('section').style.display = 'block';
-});
+// let startButton = document.getElementById('start-button');
+// startButton.addEventListener('click', function() {
+// 	document.querySelector('header').style.display = 'none';
+// 	document.querySelector('section').style.display = 'block';
+// });
 
 class Player {
 	constructor() {
@@ -72,9 +72,16 @@ const pickOrder = (playerArray) => {
 //let day = 1;
 let nicknameButton = document.getElementById('nickname-button');
 nicknameButton.addEventListener('click', function() {
+	document.querySelector('h1').style.display = 'none';
+	document.querySelector('section > h3').style.display = 'block';
 	for (let i = 0; i < 4; i++) {
-		setNameOfPlayer(document.querySelectorAll('input')[i].value);
-		document.querySelectorAll('input')[i].style.display = 'none';
+		if (document.querySelectorAll('input')[i].value === '') {
+			setNameOfPlayer('Player ' + i);
+		} else {
+			setNameOfPlayer(document.querySelectorAll('input')[i].value);
+		}
+		// document.querySelectorAll('input')[i].style.display = 'none';
+		document.querySelectorAll('.input-wrapper')[i].style.display = 'none';
 	}
 	setRandomEconomicClass(playerArray);
 	pickOrder(playerArray);
@@ -84,24 +91,33 @@ nicknameButton.addEventListener('click', function() {
 });
 
 const showCharacters = (playerArray) => {
-	let bodyEl = document.querySelector('body');
+	let mainEl = document.querySelector('main');
 	let createdDiv = document.createElement('div');
 	createdDiv.classList.add('wrapper');
-	bodyEl.appendChild(createdDiv);
+	mainEl.appendChild(createdDiv);
 	for (let i = 0; i < 4; i++) {
 		let characterBlock = document.createElement('div');
 		characterBlock.classList.add('character-block');
 		createdDiv.appendChild(characterBlock);
 		let nameH3 = document.createElement('h3');
+		nameH3.classList.add('name-h3');
 		nameH3.innerHTML = playerArray[i].name;
 		characterBlock.appendChild(nameH3);
 		let economicClassH3 = document.createElement('h3');
 		economicClassH3.innerHTML = playerArray[i].economicClass;
 		characterBlock.appendChild(economicClassH3);
 		let moneyAmtH3 = document.createElement('h3');
-		moneyAmtH3.innerHTML = playerArray[i].amountOfMoney;
+		moneyAmtH3.innerHTML = '$' + playerArray[i].amountOfMoney;
 		characterBlock.appendChild(moneyAmtH3);
-
+		let stepDivContainer = document.createElement('div');
+			stepDivContainer.classList.add('step-div-container');
+			characterBlock.appendChild(stepDivContainer);
+			for (let i = 0; i < 30; i++) {
+				let stepDiv = document.createElement('div');
+				stepDiv.classList.add('step-div');
+				stepDivContainer.appendChild(stepDiv);
+			}
+		
 	}
 }
 
@@ -151,9 +167,8 @@ const playMiniEvent = () => {
 }
 
 const playGame = () => {
-	//setPlayerData(playerArray);
-	//rollDice(playerArray[1]);
-	//pickRandomEvent(eventMLArray, playerArray[1]);
-	//console.log(playerArray);
+	// while (true) {
+
+	// }
 
 }

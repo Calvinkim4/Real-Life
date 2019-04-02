@@ -1,13 +1,20 @@
 body {
 	text-align: center;
-	font-family: 'Diplomata SC', cursive;
+	/*font-family: 'Diplomata SC', cursive*/
 	/*font-family: 'Tangerine', cursive;*/
 	background-color: #17a834;
 }
 
 h1 {
+	font-family: 'Diplomata SC', cursive;
 	font-size: 90px;
 	color: #E8FCCF;
+}
+
+h3 {
+	font-family: 'Diplomata SC', cursive;
+	color: white;
+	font-size: 15px;
 }
 
 #start-button {
@@ -16,7 +23,6 @@ h1 {
 	text-align: center;
 	font-size: 20px;
 	font-weight: 700;
-	margin-top: 50px;
 	height: 150px;
 	width: 300px;
 	border: 2px solid black;
@@ -31,22 +37,26 @@ h1 {
 }
 
 section {
-	display: none;
+	/*display: none;*/
 	font-family: 'Tangerine', cursive;
 }
 
-section > h2 {
+/*section > h2 {
 	font-size: 100px;
 	color: #E8FCCF;
+	margin: 50px;
 
-}
+}*/
 
 section > h3 {
 	position: absolute;
 	top: 0;
-	left: 0;
-	margin-left: 20px;
-	font-size: 50px;
+	right: 0;
+	display: none;
+	margin-top: 20px;
+	margin-right: 20px;
+	margin-bottom: 0;
+	font-size: 30px;
 	color: #E8FCCF;
 }
 
@@ -62,10 +72,16 @@ div > input {
 	font-size: 40px;
 	text-align: center;
 	font-family: 'Diplomata SC', cursive;
+	border: 2px solid black;
+	border-radius: 10px;
 }
 
 div > input:focus {
 	background-color: #E0E0E0;
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, .2);
 }
 
 section > button {
@@ -83,12 +99,39 @@ section > button:active {
 }
 
 .wrapper {
-	display: flex;
+	/*display: flex;
 	flex: row;
-	justify-content: center;
+	justify-content: center;*/
+	display: inline-block;
+	width: 100%;
+	font-size: 12px;
+	text-align: left;
 }
 
 .character-block {
-	width: 20%;
-	margin: 5px;
+	margin: 0 50px;
+}
+
+.play-game-button {
+	width: 200px;
+	height: 55px;
+	margin-top: 30px;
+	border: 10px solid black;
+	font-size: 20px;
+	font-family: 'Diplomata SC', cursive;
+}
+
+.step-div-container {
+	display: flex;
+	flex: row;
+	width: 100%;
+	height: 50px;
+
+}
+
+.step-div {
+	width: 4%;
+	height: auto;
+	border-bottom: 2px solid white;
+	margin: 0 2px;
 }
