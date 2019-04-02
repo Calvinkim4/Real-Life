@@ -69,14 +69,14 @@ const pickOrder = (playerArray) => {
 	}
 }
 
-//let day = 1;
+let day = 1;
 let nicknameButton = document.getElementById('nickname-button');
 nicknameButton.addEventListener('click', function() {
 	document.querySelector('h1').style.display = 'none';
 	document.querySelector('section > h3').style.display = 'block';
 	for (let i = 0; i < 4; i++) {
 		if (document.querySelectorAll('input')[i].value === '') {
-			setNameOfPlayer('Player ' + i);
+			setNameOfPlayer('Player ' + (i + 1));
 		} else {
 			setNameOfPlayer(document.querySelectorAll('input')[i].value);
 		}
@@ -85,9 +85,10 @@ nicknameButton.addEventListener('click', function() {
 	}
 	setRandomEconomicClass(playerArray);
 	pickOrder(playerArray);
-	//document.querySelector('section > h3').innerHTML = 'Day: ' + day;
+	document.querySelector('section > h3').innerHTML = 'Day: ' + day;
 	nicknameButton.style.display = 'none';
 	showCharacters(playerArray);
+	document.getElementById('roll-div').style.display = 'block';
 });
 
 const showCharacters = (playerArray) => {
@@ -110,15 +111,23 @@ const showCharacters = (playerArray) => {
 		moneyAmtH3.innerHTML = '$' + playerArray[i].amountOfMoney;
 		characterBlock.appendChild(moneyAmtH3);
 		let stepDivContainer = document.createElement('div');
-			stepDivContainer.classList.add('step-div-container');
-			characterBlock.appendChild(stepDivContainer);
-			for (let i = 0; i < 30; i++) {
-				let stepDiv = document.createElement('div');
-				stepDiv.classList.add('step-div');
-				stepDivContainer.appendChild(stepDiv);
+		stepDivContainer.classList.add('step-div-container');
+		stepDivContainer.classList.add('step-div-container' + i);
+		characterBlock.appendChild(stepDivContainer);
+		let playerDiv = document.createElement('div');
+		playerDiv.setAttribute('id', 'player-div' + i)
+		for (let i = 0; i < 30; i++) {
+			let stepDiv = document.createElement('div');
+			if (i === 0) {
+				stepDiv.appendChild(playerDiv);
 			}
+			stepDiv.classList.add('step-div');
+			stepDiv.classList.add('step-one' + i);
+			stepDivContainer.appendChild(stepDiv);
+		}
 		
 	}
+	playGame();
 }
 
 let eventMLArray = [
@@ -138,17 +147,26 @@ let eventUArray = [];
 
 const rollDice = (player) => {
 	if (player.economicClass === 'MiddleClass' || player.economicClass === 'LowerClass') {
-		let rollNumber = Math.floor(Math.random() * 6) + 1;
+		let rollNumber = Math.floor(Math.random() * 5) + 1;
 		player.position += rollNumber;
 	}
 	if (player.economicClass === 'UpperClass') {
-		let rollNumber = Math.floor(Math.random() * 10) + 1;
+		let rollNumber = Math.floor(Math.random() * 8) + 1;
 		player.position += rollNumber;
 	}
 }
 
-const movePlayer = () => {
-	// move player certain amount graphically
+const movePlayer = (player) => {
+	let setDivContainer = document.querySelector('.step-div-container0');
+	let containerDivs = setDivContainer.children;
+	let playerDiv = document.getElementById('player-div' + player.order);
+	if (player.position > containerDivs.length - 1) {
+		containerDivs[containerDivs.length - 1].appendChild(playerDiv);
+	} else {
+		containerDivs[player.position].appendChild(playerDiv);
+	}
+	
+	// console.log(containerDivs);
 }
 
 const pickRandomEvent = (eventArray, player) => {
@@ -157,7 +175,8 @@ const pickRandomEvent = (eventArray, player) => {
 	if (player.economicClass === 'MiddleClass' || player.economicClass === 'LowerClass') {
 		let event = eventArray[randomIndex];
 		//let eventObj = new Event(event[0], event[1], event[2], event[3], event[4], event[5], event[6], event[7], event[8]);
-
+	} else {
+		
 	}
 
 }
@@ -167,8 +186,10 @@ const playMiniEvent = () => {
 }
 
 const playGame = () => {
-	// while (true) {
-
-	// }
+	let rollButton = document.getElementById('roll-button');
+	rollButton.addEventListener('click', function () {
+		rollDice(playerArray[0]);
+		movePlayer(playerArray[0]);
+	});
 
 }

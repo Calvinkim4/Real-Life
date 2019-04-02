@@ -17,6 +17,36 @@ h3 {
 	font-size: 15px;
 }
 
+button:focus {
+	outline: 0;
+}
+
+#roll-div {
+	position: absolute;
+	top: 0;
+	left: 45%;
+	display: none;
+}
+
+#roll-button {
+	font-family: 'Diplomata SC', cursive;
+	font-size: 20px;
+	width: 150px;
+	height: 50px;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+
+#roll-button:active {
+	background-color: #134611;
+	color: #96E072;
+}
+
+h4 {
+	font-size: 20px;
+	font-family: 'Diplomata SC', cursive;
+}
+
 #start-button {
 	font-family: 'Diplomata SC', cursive;
 	/*font-family: 'Tangerine', cursive;*/
@@ -78,6 +108,7 @@ div > input {
 
 div > input:focus {
 	background-color: #E0E0E0;
+	outline-color: #f4cb42;
 }
 
 input::placeholder {
@@ -134,4 +165,28 @@ section > button:active {
 	height: auto;
 	border-bottom: 2px solid white;
 	margin: 0 2px;
+}
+
+#player-div0 {
+	width: 100%;
+	height: 100%;
+	background-color: yellow;
+}
+
+#player-div1 {
+	width: 100%;
+	height: 100%;
+	background-color: red;
+}
+
+#player-div2 {
+	width: 100%;
+	height: 100%;
+	background-color: green;
+}
+
+#player-div3 {
+	width: 100%;
+	height: 100%;
+	background-color: blue;
 }
