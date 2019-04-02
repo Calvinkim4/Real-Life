@@ -69,18 +69,41 @@ const pickOrder = (playerArray) => {
 	}
 }
 
+//let day = 1;
 let nicknameButton = document.getElementById('nickname-button');
 nicknameButton.addEventListener('click', function() {
 	for (let i = 0; i < 4; i++) {
 		setNameOfPlayer(document.querySelectorAll('input')[i].value);
+		document.querySelectorAll('input')[i].style.display = 'none';
 	}
 	setRandomEconomicClass(playerArray);
 	pickOrder(playerArray);
+	//document.querySelector('section > h3').innerHTML = 'Day: ' + day;
+	nicknameButton.style.display = 'none';
+	showCharacters(playerArray);
 });
 
+const showCharacters = (playerArray) => {
+	let bodyEl = document.querySelector('body');
+	let createdDiv = document.createElement('div');
+	createdDiv.classList.add('wrapper');
+	bodyEl.appendChild(createdDiv);
+	for (let i = 0; i < 4; i++) {
+		let characterBlock = document.createElement('div');
+		characterBlock.classList.add('character-block');
+		createdDiv.appendChild(characterBlock);
+		let nameH3 = document.createElement('h3');
+		nameH3.innerHTML = playerArray[i].name;
+		characterBlock.appendChild(nameH3);
+		let economicClassH3 = document.createElement('h3');
+		economicClassH3.innerHTML = playerArray[i].economicClass;
+		characterBlock.appendChild(economicClassH3);
+		let moneyAmtH3 = document.createElement('h3');
+		moneyAmtH3.innerHTML = playerArray[i].amountOfMoney;
+		characterBlock.appendChild(moneyAmtH3);
 
-
-
+	}
+}
 
 let eventMLArray = [
 ['While jogging, you notice a shady looking grandmother', 'She mugs you', 'You help her mug someone else', 60, -100, 100],
@@ -134,5 +157,3 @@ const playGame = () => {
 	//console.log(playerArray);
 
 }
-
-//playGame();
