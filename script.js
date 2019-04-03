@@ -1,9 +1,3 @@
-// let startButton = document.getElementById('start-button');
-// startButton.addEventListener('click', function() {
-// 	document.querySelector('header').style.display = 'none';
-// 	document.querySelector('section').style.display = 'block';
-// });
-
 class Player {
 	constructor() {
 		this.name= '';
@@ -11,11 +5,14 @@ class Player {
 		this.economicClass = '';
 		this.amountOfMoney = 0;
 		this.order = 0;
-		this.skipturnAmount = 0;
+		this.finished = false;
+		this.dead = false;
+		//this.skipturnAmount = 0;
 
 	}
 }
 
+let deadPlayerArray = [];
 let playerArray = [];
 const setNameOfPlayer = (playerName) => {
 	let player = new Player();
@@ -41,20 +38,20 @@ const setRandomEconomicClass = (playerArray) => {
 
 		switch(i) {
 			case 0:
-				playerArray[i].economicClass = 'UpperClass';
-				playerArray[i].amountOfMoney = 1000000;
+				playerArray[0].economicClass = 'UpperClass';
+				playerArray[0].amountOfMoney = 1000000;
 				break;
 			case 1:
-				playerArray[i].economicClass = 'MiddleClass';
-				playerArray[i].amountOfMoney = 10000;
+				playerArray[1].economicClass = 'MiddleClass';
+				playerArray[1].amountOfMoney = 0;
 				break;
 			case 2:
-				playerArray[i].economicClass = 'MiddleClass';
-				playerArray[i].amountOfMoney = 10000;
+				playerArray[2].economicClass = 'MiddleClass';
+				playerArray[2].amountOfMoney = 0;
 				break;
 			case 3:
-				playerArray[i].economicClass = 'LowerClass';
-				playerArray[i].amountOfMoney = 5000;
+				playerArray[3].economicClass = 'LowerClass';
+				playerArray[3].amountOfMoney = 100;
 				break;
 			default:
 			break;
@@ -108,6 +105,7 @@ const showCharacters = (playerArray) => {
 		economicClassH3.innerHTML = playerArray[i].economicClass;
 		characterBlock.appendChild(economicClassH3);
 		let moneyAmtH3 = document.createElement('h3');
+		moneyAmtH3.classList.add('money-amt-class');
 		moneyAmtH3.innerHTML = '$' + playerArray[i].amountOfMoney;
 		characterBlock.appendChild(moneyAmtH3);
 		let stepDivContainer = document.createElement('div');
@@ -131,17 +129,27 @@ const showCharacters = (playerArray) => {
 }
 
 let eventMLArray = [
-['While jogging, you notice a shady looking grandmother', 'She mugs you', 'You help her mug someone else', 60, -100, 100],
-['While walking around your work place, someone coughs on you', 'Your coworker does not apologize and you get sick', 'You get paid time off', 70, -100, 100],
-['You worked hard this year and your boss takes notice', 'Just kidding', 'Your boss is feeling generous', 5, 0, 1000],
-['Someone hit your car while they were backing up', 'Your car continues to play Ice Ice Baby on repeat', 'It turns out Elon Musk hit you and he gives you a Tesla', 30, -300, 300],
-['Your neighbor forgets to turn off the oven while making cereal', 'The flames engulf your apartment', '', 40, -200],
-['While at the bus you tied your shoes', 'The bus driver leaves without you', 30],
-['Your mother tells you about a company you can invest in', 'It\'s a ponzi scheme', 'It\'s a ponzi scheme but you find other suckers', 80, -1000, 1000],
-['The drug dealer you buy weed from asks you to drive weed to another state for money', 'You star in COPS', '', 5, -2000],
-['You don\'t want to miss the bus so you step over on the street to get his attention', 'You get hit by the bus', 10, -8000],
-['You decide to buy a lottery ticket because your life sucks', 'Life continues to suck', 'Gucci everywhere ', 1, -5, 1000000],
-['You become internet famous', 'For breaking into the zoo while high', 20, 2000],
+// event, bad, good, percentage, money lost from bad, money gained from good, steps back from bad, steps forward from good
+['While jogging, you notice a shady looking grandmother', 'She mugs you', 'You help her mug someone else', 60, 40, -100, 100, 0, 0],
+// ['While walking around your work place, someone coughs on you', 'Your coworker does not apologize and you get sick', 'You get paid time off', 70, 30, -100, 100, -1, 1],
+// ['You worked hard this year and your boss takes notice', 'Just kidding', 'Your boss is feeling generous', 5, 95, 0, 1000, 0, 1],
+// ['Someone hit your car while they were backing up', 'Your car continues to play Ice Ice Baby on repeat', 'It turns out Elon Musk hit you and he gives you a Tesla', 30, 70, -300, 300, -1, 2],
+// ['Your neighbor forgets to turn off the oven while making cereal', 'The flames engulf your apartment', '', 40, 60, -200, 0, 0],
+// ['While at the bus you tied your shoes', 'The bus driver leaves without you', 30, 70, -1, 1],
+// ['Your mother tells you about a company you can invest in', 'It\'s a ponzi scheme', 'It\'s a ponzi scheme but you find other suckers', 80, 20, -1000, 1000, 0, 0],
+// ['The drug dealer you buy weed from asks you to drive weed to another state for money', 'You star in COPS', '', 5, 95, -2000, -2, 1],
+// ['Your bus driver is 3/4-blind so you step over on the street to get his attention', 'You get hit by the bus', 10, 90, -8000, -2, 2],
+// ['You decide to buy a lottery ticket because your life sucks', 'Life continues to suck', 'Gucci everywhere ', 1, 99, -5, 1000000, 0, 5],
+// ['You become internet famous', 'For breaking into the zoo while high', 'For saving the United States from zombies', 20, 80, 2000, 0, 0],
+// ['Your friend wants to start a business with you', 'The business is a failure', 'Business is booming', 1, 90, -200, 10000, 0, 0],
+// ['While walking, you notice a friendly looking grandfather', 'He\'s a ghost here to claim your soul', 'He\'s actually your grandfather', 20, 80, 0, 100, -1, 0],
+// ['You find a 100 dollar bill on the floor', 'It\'s actually a fake 100', '100 in the bank', 10, 90, 0, 100, 0, 0],
+// ['You start a band in your friend\'s uncle\'s grandmother\'s garage', 'She has dementia and calls the cops on you', 'You rock hard', 10, 90, -200, 500, 0, 0],
+// ['You apply for General Assembly', 'You don\'t have what it takes', 'You got in', 30, 70, 0, -1500, 0, 2],
+// ['You meet Peter Thiel and try to pitch your idea to him', 'You get too excited and pass out', 'You get series A funding', 1, 99, -500, 100000, 0, 0],
+// ['Your a shut-in because your too powerful', 'You leave but you accidently freeze your sister Anna', 'You become a queen', 40, 60, 0, 0, 0, 1],
+// ['You rule pride rock but your son is being annoying', 'You die', 'Your son grows up to be awesome', 80, 20, 0, 0, -2, 1],
+// ['The prince of Canada']
 ];
 let eventUArray = [];
 
@@ -149,47 +157,132 @@ const rollDice = (player) => {
 	if (player.economicClass === 'MiddleClass' || player.economicClass === 'LowerClass') {
 		let rollNumber = Math.floor(Math.random() * 5) + 1;
 		player.position += rollNumber;
+		document.querySelector('#roll-div > h4').innerHTML = rollNumber;
 	}
 	if (player.economicClass === 'UpperClass') {
 		let rollNumber = Math.floor(Math.random() * 8) + 1;
 		player.position += rollNumber;
+		document.querySelector('#roll-div > h4').innerHTML = rollNumber;
 	}
 }
 
 const movePlayer = (player) => {
-	let setDivContainer = document.querySelector('.step-div-container0');
+	let setDivContainer = document.querySelector('.step-div-container' + player.order);
 	let containerDivs = setDivContainer.children;
 	let playerDiv = document.getElementById('player-div' + player.order);
 	if (player.position > containerDivs.length - 1) {
 		containerDivs[containerDivs.length - 1].appendChild(playerDiv);
+		player.finished = true;
 	} else {
 		containerDivs[player.position].appendChild(playerDiv);
 	}
-	
-	// console.log(containerDivs);
 }
 
 const pickRandomEvent = (eventArray, player) => {
 	let randomIndex = Math.floor(Math.random() * eventArray.length);
-
+	let randomEvent;
 	if (player.economicClass === 'MiddleClass' || player.economicClass === 'LowerClass') {
-		let event = eventArray[randomIndex];
-		//let eventObj = new Event(event[0], event[1], event[2], event[3], event[4], event[5], event[6], event[7], event[8]);
+		randomEvent = eventArray[randomIndex];
 	} else {
-		
+		randomEvent = eventArray[randomIndex];
 	}
 
+	return randomEvent;
 }
 
-const playMiniEvent = () => {
+// const playMiniEvent = () => {
 
-}
+// }
 
-const playGame = () => {
-	let rollButton = document.getElementById('roll-button');
-	rollButton.addEventListener('click', function () {
+const nextTurn = () => {
+	// let playerTurn = playerArray[0];
+	if (!playerArray[0].finished) {
 		rollDice(playerArray[0]);
 		movePlayer(playerArray[0]);
+	}
+	// playerArray.splice(0, 1);
+	// playerArray.push(playerTurn);
+}
+
+const showEvent = (randomEvent) => {
+	let modal = document.querySelector('.modal-background');
+	modal.style.display = 'block';
+	document.querySelector('.modal-content > h3').innerHTML = randomEvent[0];
+	document.querySelector('#good-event > h4').innerHTML = randomEvent[1];
+	document.querySelector('#bad-event > h4').innerHTML = randomEvent[2];
+	document.querySelector('#good-event > h5').innerHTML = randomEvent[3];
+	document.querySelector('#bad-event > h5').innerHTML = randomEvent[4];
+}
+
+const setEventEffect = (randomEvent, player) => {
+	if (randomEvent[3] < Math.floor(Math.random() * 100)) {
+		player.position += randomEvent[8];
+		player.amountOfMoney += randomEvent[5];
+	} else {
+		player.position += randomEvent[7];
+		player.amountOfMoney += randomEvent[6];
+	}
+}
+
+const checkWinner = () => {
+	 if (playerArray.length === 1) {
+	 	console.log('winner');
+	 }
+}
+
+
+let turns = 0;
+const playGame = () => {
+	let chosenEvent;
+	let rollButton = document.getElementById('roll-button');
+	rollButton.addEventListener('click', function () {
+		chosenEvent = pickRandomEvent(eventMLArray, playerArray[0]);
+		nextTurn();
+		showEvent(chosenEvent);	
+		turns++;
+		if (turns % playerArray.length === 0) {
+		day++;
+		document.querySelector('section > h3').innerHTML = 'Day: ' + day;
+	}
 	});
+	let chooseButton = document.getElementById('event-roll-button');
+		chooseButton.addEventListener('click', function() {
+		setEventEffect(chosenEvent, playerArray[0]);
+		document.querySelectorAll('.money-amt-class')[playerArray[0].order].innerHTML = playerArray[0].amountOfMoney;
+		document.querySelector('.modal-background').style.display = 'none';
+		playerArray.push(playerArray[0]);
+		playerArray.splice(0, 1);
+		// console.log(playerArray);
+		for (let i = playerArray.length - 1; i >= 0; i--) {
+			if (playerArray[i].amountOfMoney <= 0) {
+			playerArray[i].dead = true;
+			playerArray.splice(i, 1);
+			// console.log('spliced');
+			// console.log(playerArray);
+		} 
+		//console.log(playerArray);
+		}
+		
+		checkWinner();
+	// if (!playerArray[0].dead) {
+	// 	let chooseButton = document.getElementById('event-roll-button');
+	// 	chooseButton.addEventListener('click', function() {
+	// 	setEventEffect(chosenEvent, playerArray[0]);
+	// 	//console.log(playerArray[0]);
+	// 	//console.log(document.querySelectorAll('.money-amt-class')[playerArray[0].order].innerHTML);
+	// 	document.querySelectorAll('.money-amt-class')[playerArray[0].order].innerHTML = playerArray[0].amountOfMoney;
+	// 	document.querySelector('.modal-background').style.display = 'none';
+	// 	playerArray.push(playerArray[0]);
+	// 	playerArray.splice(0, 1);
+	});
+	// } else {
+	// 	document.querySelector('.modal-background').style.display = 'none';
+	// 	playerArray.push(playerArray[0]);
+	// 	playerArray.splice(0, 1);
+	// }
+	
+}
+
+const resetGame = () => {
 
 }
