@@ -25,11 +25,19 @@ button:focus {
 }
 
 #roll-div {
+	position: fixed;
+	top: 0;
+	width: 50%;
+	display: none;
+	margin-top: 30px;
+}
+
+/*#characters-top-container {
 	position: absolute;
 	top: 0;
-	left: 45%;
-	display: none;
-}
+	right: 0;
+
+}*/
 
 #roll-button {
 	font-family: 'Indie Flower', cursive;
@@ -38,7 +46,7 @@ button:focus {
 	height: 50px;
 	border: 2px solid black;
 	border-radius: 10px;
-	margin-top: 0;
+	margin-top: 20px;
 	background-color: #134611;
 	color: #96E072;
 }
@@ -51,9 +59,10 @@ button:focus {
 #roll-div > h4 {
 	font-size: 30px;
 	font-family: 'Indie Flower', cursive;
+	margin-top: 10px;
+	color: #E8FCCF;
 	display: inline-block;
 	margin-left: 20px;
-	color: #E8FCCF;
 }
 
 #nickname-button {
@@ -154,9 +163,25 @@ section > button:active {
 	text-align: left;
 }
 
+.only-character-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+
+}
+
+.character-value {
+	display: inline-block;
+	margin: 20px;
+}
+
 .character-block {
 	margin: 0 50px;
 	color: #E8FCCF;
+}
+
+.grid {
+	margin-top: 100px;
 }
 
 .play-game-button {
@@ -171,16 +196,16 @@ section > button:active {
 .step-div-container {
 	display: flex;
 	flex: row;
-	width: 100%;
-	height: 50px;
+	width: 10450px;
+	height: 120px;
 
 }
 
 .step-div {
-	width: 4%;
-	height: auto;
+	width: 100px;
+	height: 100px;
 	border-bottom: 2px solid white;
-	margin: 0 2px;
+	margin: 100px 2px;
 	border-color: #137547;
 	background-color: rgba(0, 0, 0, .1);
 }

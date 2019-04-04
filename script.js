@@ -48,7 +48,6 @@ const setRandomEconomicClass = (playerArray) => {
 			case 2:
 				playerArray[2].economicClass = 'MiddleClass';
 				playerArray[2].amountOfMoney = 10000;
-				playerArray[2].position = 29;
 				break;
 			case 3:
 				playerArray[3].economicClass = 'LowerClass';
@@ -86,18 +85,19 @@ nicknameButton.addEventListener('click', function() {
 	// document.querySelector('section > h3').innerHTML = 'Day: ' + day;
 	nicknameButton.style.display = 'none';
 	showCharacters(playerArray);
+	createGrid();
 	document.getElementById('roll-div').style.display = 'block';
 });
 
 const showCharacters = (playerArray) => {
-	let mainEl = document.querySelector('main');
-	let createdDiv = document.createElement('div');
-	createdDiv.classList.add('wrapper');
-	mainEl.appendChild(createdDiv);
+	let charactersContainer = document.getElementById('characters-top-container');
+	let containerDiv = document.createElement('div');
+	containerDiv.classList.add('only-character-container');
+	charactersContainer.appendChild(containerDiv);
 	for (let i = 0; i < 4; i++) {
 		let characterBlock = document.createElement('div');
-		characterBlock.classList.add('character-block');
-		createdDiv.appendChild(characterBlock);
+		characterBlock.classList.add('character-value');
+		containerDiv.appendChild(characterBlock);
 		let nameH3 = document.createElement('h3');
 		nameH3.classList.add('name-h3');
 		nameH3.innerHTML = playerArray[i].name;
@@ -109,13 +109,25 @@ const showCharacters = (playerArray) => {
 		moneyAmtH3.classList.add('money-amt-class');
 		moneyAmtH3.innerHTML = '$' + playerArray[i].amountOfMoney;
 		characterBlock.appendChild(moneyAmtH3);
+	}
+
+	playGame();
+}
+
+const createGrid = () => {
+	let gridContainer = document.createElement('div');
+	gridContainer.classList.add('grid');
+	document.querySelector('main').appendChild(gridContainer);
+	for (let i = 0; i < 4; i++) {
+		let characterBlock = document.createElement('div');
+		gridContainer.appendChild(characterBlock);
 		let stepDivContainer = document.createElement('div');
 		stepDivContainer.classList.add('step-div-container');
 		stepDivContainer.classList.add('step-div-container' + i);
 		characterBlock.appendChild(stepDivContainer);
 		let playerDiv = document.createElement('div');
 		playerDiv.setAttribute('id', 'player-div' + i)
-		for (let i = 0; i < 30; i++) {
+		for (let i = 0; i < 100; i++) {
 			let stepDiv = document.createElement('div');
 			if (i === 0) {
 				stepDiv.appendChild(playerDiv);
@@ -126,8 +138,47 @@ const showCharacters = (playerArray) => {
 		}
 		
 	}
-	playGame();
 }
+
+// const showCharacters = (playerArray) => {
+// 	let mainEl = document.querySelector('main');
+// 	let createdDiv = document.createElement('div');
+// 	createdDiv.classList.add('wrapper');
+// 	mainEl.appendChild(createdDiv);
+// 	for (let i = 0; i < 4; i++) {
+// 		let characterBlock = document.createElement('div');
+// 		characterBlock.classList.add('character-block');
+// 		createdDiv.appendChild(characterBlock);
+// 		let nameH3 = document.createElement('h3');
+// 		nameH3.classList.add('name-h3');
+// 		nameH3.innerHTML = playerArray[i].name;
+// 		characterBlock.appendChild(nameH3);
+// 		let economicClassH3 = document.createElement('h3');
+// 		economicClassH3.innerHTML = playerArray[i].economicClass;
+// 		characterBlock.appendChild(economicClassH3);
+// 		let moneyAmtH3 = document.createElement('h3');
+// 		moneyAmtH3.classList.add('money-amt-class');
+// 		moneyAmtH3.innerHTML = '$' + playerArray[i].amountOfMoney;
+// 		characterBlock.appendChild(moneyAmtH3);
+// 		let stepDivContainer = document.createElement('div');
+// 		stepDivContainer.classList.add('step-div-container');
+// 		stepDivContainer.classList.add('step-div-container' + i);
+// 		characterBlock.appendChild(stepDivContainer);
+// 		let playerDiv = document.createElement('div');
+// 		playerDiv.setAttribute('id', 'player-div' + i)
+// 		for (let i = 0; i < 30; i++) {
+// 			let stepDiv = document.createElement('div');
+// 			if (i === 0) {
+// 				stepDiv.appendChild(playerDiv);
+// 			}
+// 			stepDiv.classList.add('step-div');
+// 			stepDiv.classList.add('step-one' + i);
+// 			stepDivContainer.appendChild(stepDiv);
+// 		}
+		
+// 	}
+// 	playGame();
+// }
 
 let eventMLArray = [
 // event, bad, good, percentage, money lost from bad, money gained from good, steps back from bad, steps forward from good
@@ -161,7 +212,7 @@ const rollDice = (player) => {
 		document.querySelector('#roll-div > h4').innerHTML = rollNumber;
 	}
 	if (player.economicClass === 'UpperClass') {
-		let rollNumber = 30;
+		let rollNumber = Math.floor(Math.random() * 8) + 1;;
 		player.position += rollNumber;
 		document.querySelector('#roll-div > h4').innerHTML = rollNumber;
 	}
