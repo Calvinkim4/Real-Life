@@ -39,18 +39,19 @@ const setRandomEconomicClass = (playerArray) => {
 			case 0:
 				playerArray[0].economicClass = 'UpperClass';
 				playerArray[0].amountOfMoney = 10000000;
+				playerArray[0].position = 99;
 				break;
 			case 1:
 				playerArray[1].economicClass = 'MiddleClass';
-				playerArray[1].amountOfMoney = 80000;
+				playerArray[1].amountOfMoney = 100;
 				break;
 			case 2:
 				playerArray[2].economicClass = 'MiddleClass';
-				playerArray[2].amountOfMoney = 80000;
+				playerArray[2].amountOfMoney = 1100;
 				break;
 			case 3:
 				playerArray[3].economicClass = 'LowerClass';
-				playerArray[3].amountOfMoney = 30000;
+				playerArray[3].amountOfMoney = 100;
 				break;
 			default:
 			break;
@@ -111,6 +112,39 @@ const showCharacters = (playerArray) => {
 	}
 }
 
+const setOpportunities = (classNum) => {
+	let upper = 10;
+	let middle = 5;
+	let lower = 3;
+	let arrayOfOppPosition =[];
+	if (classNum === 0) {
+		for (let i = 0; arrayOfOppPosition.length < upper; i++) {
+			let randomNum = Math.floor(Math.random() * 98) + 1;
+			if (!arrayOfOppPosition.includes(randomNum)) {
+				arrayOfOppPosition.push(randomNum);
+			}
+		}
+		
+	} else if (classNum === 3) {
+		for (let i = 0; arrayOfOppPosition.length < lower; i++) {
+			let randomNum = Math.floor(Math.random() * 98) + 1;
+			if (!arrayOfOppPosition.includes(randomNum)) {
+				arrayOfOppPosition.push(randomNum);
+			}
+		}
+	} else if (classNum === 1 || classNum === 2) {
+		for (let i = 0; arrayOfOppPosition.length < middle; i++) {
+			let randomNum = Math.floor(Math.random() * 98) + 1;
+			if (!arrayOfOppPosition.includes(randomNum)) {
+				arrayOfOppPosition.push(randomNum);
+			}
+		}
+	}
+
+	arrayOfOppPosition.sort();
+	return arrayOfOppPosition;
+}
+
 const createGrid = () => {
 	let gridContainer = document.createElement('div');
 	gridContainer.classList.add('grid');
@@ -124,8 +158,12 @@ const createGrid = () => {
 		characterBlock.appendChild(stepDivContainer);
 		let playerDiv = document.createElement('div');
 		playerDiv.setAttribute('id', 'player-div' + i)
+		let oppArray = setOpportunities(i);
 		for (let i = 0; i < 100; i++) {
 			let stepDiv = document.createElement('div');
+			if (oppArray.includes(i)) {
+				stepDiv.innerHTML = 'x';
+			}
 			if (i === 0) {
 				stepDiv.appendChild(playerDiv);
 			}
@@ -162,19 +200,23 @@ let eventMLArray = [
 ];
 let eventUArray = [];
 
+let previousPosition;
 const rollDice = (player) => {
 	if (player.economicClass === 'MiddleClass' || player.economicClass === 'LowerClass') {
 		let rollNumber = Math.floor(Math.random() * 5) + 1;
+		previousPosition = player.position;
 		player.position += rollNumber;
 		document.querySelector('#roll-div > h4').innerHTML = rollNumber;
 	}
 	if (player.economicClass === 'UpperClass') {
-		let rollNumber = Math.floor(Math.random() * 8) + 1;;
+		let rollNumber = Math.floor(Math.random() * 8) + 1;
+		previousPosition = player.position;
 		player.position += rollNumber;
 		document.querySelector('#roll-div > h4').innerHTML = rollNumber;
 	}
 }
 
+let interval = 1000;
 const movePlayer = (player) => {
 	let setDivContainer = document.querySelector('.step-div-container' + player.order);
 	let containerDivs = setDivContainer.children;
@@ -182,8 +224,18 @@ const movePlayer = (player) => {
 	if (player.position >= containerDivs.length - 1) {
 		containerDivs[containerDivs.length - 1].appendChild(playerDiv);
 		player.finished = true;
+	} else if (player.position < 0) {
+		containerDivs[0].appendChild(playerDiv);
+		player.position = 0;
 	} else {
 		containerDivs[player.position].appendChild(playerDiv);
+		// for (let i = previousPosition; i < player.position; i++) {
+		// 	setTimeout(function () {
+		// 		containerDivs[i].appendChild(playerDiv);
+		// 	}, interval);
+		// 	interval += 1000;
+		// }
+		
 	}
 }
 
@@ -240,14 +292,26 @@ const checkForEconChange = (player) => {
 	economicClassH3[player.order].innerHTML = player.economicClass;
 }
 
+const collectForFinished = (player) => {
+	if (player.finished) {
+		player.amountOfMoney += 100;
+	}
+}
+
 let gameFinished = false;
 const checkWinner = () => {
-	 if (playerArray.length === 1 && playerArray[0].finished) {
+	 if (playerArray.length === 1) {
 	 	gameFinished = true;
-	 	console.log('winner');
+	 	let nameH3 = document.getElementsByClassName('name-h3');
+		nameH3[playerArray[0].order].style.color = '#31CB00';
+		let economicClassH3 = document.getElementsByClassName('economic-class-name');
+		economicClassH3[playerArray[0].order].style.color = '#31CB00';
+		let moneyAmtH3 = document.getElementsByClassName('money-amt-class');
+		moneyAmtH3[playerArray[0].order].style.color = '#31CB00';
 	 	document.getElementById('roll-button').innerHTML = 'RESET';
 	 }
 }
+
 
 const resetGame = () => {
 	for (let i = 0; i < deadPlayerArray.length; i++) {
@@ -268,24 +332,56 @@ const resetGame = () => {
 	pickOrder(playerArray);
 
 	gameFinished = false;
-
-	// document.querySelector('h1').style.display = 'block';
-	// for (let i = 0; i < 4; i++) {
-	// 	document.querySelectorAll('.input-wrapper')[i].style.display = 'block';
-	// }
-	// nicknameButton.style.display = 'inline-block';
-	// document.getElementById('roll-div').style.display = 'none';
-	// document.getElementById('characters-top-container').removeChild(document.querySelector('.only-character-container'));
-	// document.querySelector('.grid').style.display = 'none';
 	for (let i = 0; i < 4; i++) {
 		let nameH3 = document.getElementsByClassName('name-h3');
+		if (i === 0) {
+			nameH3[i].style.color = 'black';
+
+		} else {
+			nameH3[i].style.color = '#E8FCCF';
+		}
 		nameH3[i].innerHTML = playerArray[i].name;
 		let economicClassH3 = document.getElementsByClassName('economic-class-name');
 		economicClassH3[i].innerHTML = playerArray[i].economicClass;
+		economicClassH3[i].style.color = '#E8FCCF';
 		let moneyAmtH3 = document.getElementsByClassName('money-amt-class');
 		moneyAmtH3[i].innerHTML = '$' + playerArray[i].amountOfMoney;
+		moneyAmtH3[i].style.color = '#E8FCCF';
 		document.querySelector('.step-div-container' + i).children[0].appendChild(document.getElementById('player-div' + i));
 	}
+
+	document.querySelector('main').removeChild(document.querySelector('.grid'));
+	createGrid();
+	document.getElementById('roll-button').innerHTML = 'ROLL';
+
+}
+
+const choseButtonFunc = () => {
+	for (let i = 0; i < playerArray.length; i++) {
+			document.querySelectorAll('.money-amt-class')[playerArray[i].order].innerHTML = '$' + playerArray[i].amountOfMoney;
+		}
+		checkForEconChange(playerArray[0]);
+		document.querySelector('.modal-background').style.display = 'none';
+		document.querySelectorAll('.name-h3')[playerArray[0].order].style.color = '#E8FCCF';
+		playerArray.push(playerArray[0]);
+		playerArray.splice(0, 1);
+		for (let i = 0; i < playerArray.length; i++) {
+			if (playerArray[i].amountOfMoney <= 0) {
+			playerArray[i].dead = true;
+			deadPlayerArray.push(playerArray[i]);
+			playerArray.splice(i, 1);
+			} 
+		}
+
+		if (playerArray[0].finished) {
+			document.getElementById('roll-button').innerHTML = 'COLLECT';
+		} else {
+			document.getElementById('roll-button').innerHTML = 'ROLL';
+		}
+
+		document.querySelectorAll('.name-h3')[playerArray[0].order].style.color = '#054A29';
+
+		checkWinner();
 }
 
 const playGame = () => {
@@ -294,12 +390,18 @@ const playGame = () => {
 	let rollButton = document.getElementById('roll-button');
 	rollButton.addEventListener('click', function () {
 		if (!gameFinished) {
-			chosenEvent = pickRandomEvent(eventMLArray, playerArray[0]);
-			//window.setTimeout(nextTurn, 1000);
-			nextTurn();
-			//window.setTimeout(showEvent(chosenEvent), 2000);
-			//nextTurn();
-			showEvent(chosenEvent);	
+			if (playerArray[0].finished) {
+				collectForFinished(playerArray[0]);
+				choseButtonFunc();
+			} else {
+				chosenEvent = pickRandomEvent(eventMLArray, playerArray[0]);
+				window.setTimeout(nextTurn, 1000);
+				//nextTurn();
+				window.setTimeout(function () {
+					showEvent(chosenEvent)}, 2000);
+				//nextTurn();
+				//showEvent(chosenEvent);	
+			}
 		} else {
 			resetGame();
 		}
@@ -324,7 +426,12 @@ const playGame = () => {
 			playerArray.splice(i, 1);
 			} 
 		}
-		console.log(playerArray);
+
+		if (playerArray[0].finished) {
+			document.getElementById('roll-button').innerHTML = 'COLLECT';
+		} else {
+			document.getElementById('roll-button').innerHTML = 'ROLL';
+		}
 
 		document.querySelectorAll('.name-h3')[playerArray[0].order].style.color = '#054A29';
 
