@@ -3,19 +3,49 @@ body {
 	text-align: center;
 	/*font-family: 'Diplomata SC', cursive*/
 	/*font-family: 'Tangerine', cursive;*/
-	background-color: #17a834;
+	background-color: black;
+/*	background-image: url(background.png);*/
+	background-size: cover;
+	font-family: 'Indie Flower', cursive;
+}
+
+.background1 {
+	background-image: url(background.png);
+}
+
+.background2 {
+	background-image: url(background1.png);
+}
+
+#change-bg {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	font-family: 'Indie Flower', cursive;
+	font-size: 20px;
+	width: 150px;
+	height: 50px;
+	border: 2px solid black;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	background-color: #134611;
+	color: #96E072;
+}
+
+#change-bg:active {
+	background-color: #96E072;
+	color: #134611;
 }
 
 h1 {
-	font-family: 'Indie Flower', cursive;
 	font-size: 160px;
-	color: #E8FCCF;
+	color: #1E441E;
 	margin: 0px;
 }
 
 h3 {
-	font-family: 'Indie Flower', cursive;
-	color: #E8FCCF;
+	color: #1E441E;
 	font-size: 25px;
 	margin: 5px;
 }
@@ -58,9 +88,8 @@ button:focus {
 
 #roll-div > h4 {
 	font-size: 30px;
-	font-family: 'Indie Flower', cursive;
 	margin-top: 10px;
-	color: #E8FCCF;
+	color: #1E441E;
 	display: inline-block;
 	margin-left: 20px;
 }
@@ -90,7 +119,6 @@ button:focus {
 
 section {
 	/*display: none;*/
-	font-family: 'Indie Flower', cursive;
 	color: #E8FCCF;
 }
 
@@ -124,9 +152,9 @@ div > input {
 	height: 50px;
 	font-size: 40px;
 	text-align: center;
-	font-family: 'Indie Flower', cursive;
 	border: 2px solid black;
 	border-radius: 10px;
+	font-family: 'Indie Flower', cursive;
 }
 
 div > input:focus {
@@ -177,7 +205,7 @@ section > button:active {
 
 .character-block {
 	margin: 0 50px;
-	color: #E8FCCF;
+	color: #1E441E;
 }
 
 .grid {
@@ -196,7 +224,7 @@ section > button:active {
 .step-div-container {
 	display: flex;
 	flex: row;
-	width: 10450px;
+	width: 5700px;
 	height: 120px;
 
 }
@@ -204,35 +232,55 @@ section > button:active {
 .step-div {
 	width: 100px;
 	height: 100px;
-	border: 2px dashed #137547;
+	border: 4px dashed #137547;
 	border-radius: 10px;
 	/*border-bottom: 5px solid #137547;*/
 	margin: 100px 2px;
-	background-color: rgba(0, 0, 0, .1);
+	background-color: rgba(0, 0, 0, .5);
+}
+
+.step-div-border-change {
+	border: 6px solid #137547;
 }
 
 #player-div0 {
 	width: 100%;
 	height: 100%;
 	background-color: yellow;
+	background-image: url(upper.gif);
+	background-position: center;
+	background-size: auto 100%;
+	border-radius: 5px;
 }
 
 #player-div1 {
 	width: 100%;
 	height: 100%;
 	background-color: red;
+	background-image: url(middle1.gif);
+	background-position: center;
+	background-size: auto 100%;
+	border-radius: 5px;
 }
 
 #player-div2 {
 	width: 100%;
 	height: 100%;
 	background-color: green;
+	background-image: url(middle2.gif);
+	background-position: center;
+	background-size: auto 100%;
+	border-radius: 5px;
 }
 
 #player-div3 {
 	width: 100%;
 	height: 100%;
 	background-color: blue;
+	background-image: url(lower.gif);
+	background-position: center;
+	background-size: auto 100%;
+	border-radius: 5px;
 }
 
 .modal-background {
@@ -248,7 +296,7 @@ section > button:active {
 .modal-content {
   padding: 40px 20px;
   color: #444;
-  background-color: #137547;
+  background-image: linear-gradient(to bottom right, green, yellow);
   border: 2px solid black;
   border-radius: 10px;
   width: 60%;
@@ -276,7 +324,6 @@ section > button:active {
 	padding: 20px;
 	margin: 20px;
 	font-size: 20px;
-	font-family: 'Indie Flower', cursive;
 	border: 2px solid black;
 }
 
@@ -287,7 +334,6 @@ section > button:active {
 	padding: 20px;
 	margin: 20px;
 	font-size: 20px;
-	font-family: 'Indie Flower', cursive;
 	border: 2px solid black;
 }
 
