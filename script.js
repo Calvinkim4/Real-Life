@@ -42,15 +42,15 @@ const setRandomEconomicClass = (playerArray) => {
 				break;
 			case 1:
 				playerArray[1].economicClass = 'MiddleClass';
-				playerArray[1].amountOfMoney = 20000;
+				playerArray[1].amountOfMoney = 15000;
 				break;
 			case 2:
 				playerArray[2].economicClass = 'MiddleClass';
-				playerArray[2].amountOfMoney = 20000;
+				playerArray[2].amountOfMoney = 15000;
 				break;
 			case 3:
 				playerArray[3].economicClass = 'LowerClass';
-				playerArray[3].amountOfMoney = 10000;
+				playerArray[3].amountOfMoney = 8000;
 				break;
 			default:
 			break;
