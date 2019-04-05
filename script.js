@@ -65,28 +65,6 @@ const pickOrder = (playerArray) => {
 	}
 }
 
-let opportunityMLArray = [
-	['Pablo Escobar asks you if you want to be a drug mule', 'You receive jail time in a mexican prison', 'You successfully fueled the drug epidemic', 60, 40, -1000, 5000, -4, 0],
-	['You get an email from a Nigerian prince asking if you want to be rich', 'It\'s a scam', 'He\'s actually real', 1, 90, -200, 10000, 0, 0],
-	['You apply for General Assembly', 'You don\'t have what it takes', 'You got in', 30, 70, 0, -1500, 0, 2],
-	['You meet Peter Thiel and try to pitch your idea to him', 'You get too excited and pass out', 'You get series A funding', 1, 99, -500, 100000, 0, 0],
-	['David Goggins wants to train you', 'You\'re the only person to ever disappoint him', 'You become the next David Goggins', 40, 60, -1000, 2000, -5, 3]
-
-];
-
-let opportunityUArray = [
-	['Lobby for lower taxes for the rich and higher taxes for the poor', 'Not enough persuasion', 'You successfully hurt the economy', 30, 70, -2000, 10000, 0, 0],
-	['Invest in a company using insider trader knowledge', 'Fined but no jail time', 'You enjoy the money you made by buying rich people stuff', 20, 80, -2000, 6000, -2, 0],
-	['You are given the reins of the new series of Game Of Thrones', 'It\'s the worst season ever and you receive death threats', 'It\'s the best season ever', 60, 40, -100000, 100000, 0, 0],
-	['You create a coding bootcamp in NYC', 'No one attends', 'It becomes General Assemby', 30, 70, -5000, 5000, 0, 0],
-	['You steal an idea from a fellow student', 'It becomes Myspace', 'It becomes Facebook', 40, 60, -5000, 10000, 0, 0],
-	['You meet the president of the United States', 'He thinks your stupid', 'You can buy his influence', 20, 80, -3000, 10000, 0, 3],
-	['You find the cure for cancer', 'The goverment is making you give it for free', 'You can monetize it to your liking', 40, 60, -3000, 5000, 0, 0],
-	['You control the electricity in California', 'You are fined', 'You take billions from Californians', 50, 50, 4000, 4000, 0, 0],
-	['Your design a way for energy efficient plane', 'People steal your idea', 'You fly anywhere for no cost', 50, 50, 0, 0, -5, 5],
-	['You find a way to warp speed', 'You end up in a weird area with evil aliens', 'You travel without exerting energy', 50, 50, 0, 0, -4, 4]
-];
-
 let eventMLArray = [
 // event, bad, good, percentage, money lost from bad, money gained from good, steps back from bad, steps forward from good
 	['While jogging, you notice a shady looking grandmother', 'She mugs you', 'You help her mug someone else', 60, 40, -1000, 1000, 0, 0],
@@ -103,7 +81,14 @@ let eventMLArray = [
 	['A cult is after you after they find out you look like their new leader', 'They destroy your house', 'They treat you like a king', 10, 90, -3000, 5000, 0, 0],
 	['You go to college until you realize you had to study', 'You fail everything and have massive debt', 'You graduate', 40, 60, -10000, 0, 0, 3],
 	['You buy a lottery ticket because your life sucks', 'Life continues to suck', 'You have enough to pay your student loans', 99, 1, 0, 100000, 0, 0],
-	['You are chosen to shot a half court short when attending a basketball game', 'You fail miserably', 'You made it', 40, 60, 0, 1000, 0, 0]
+	['You are chosen to shot a half court short when attending a basketball game', 'You fail miserably', 'You made it', 40, 60, 0, 1000, 0, 0],
+	['Pablo Escobar asks you if you want to be a drug mule', 'You receive jail time in a mexican prison', 'You successfully fueled the drug epidemic', 60, 40, -1000, 5000, -4, 0],
+	['You get an email from a Nigerian prince asking if you want to be rich', 'It\'s a scam', 'He\'s actually real', 1, 90, -200, 10000, 0, 0],
+	['You apply for General Assembly', 'You don\'t have what it takes', 'You got in', 30, 70, 0, -1500, 0, 2],
+	['You meet Peter Thiel and try to pitch your idea to him', 'You get too excited and pass out', 'You get series A funding', 1, 99, -500, 100000, 0, 0],
+	['David Goggins wants to train you', 'You\'re the only person to ever disappoint him', 'You become the next David Goggins', 40, 60, -1000, 2000, -5, 3]
+
+
 ];
 
 let eventUArray = [
@@ -113,10 +98,21 @@ let eventUArray = [
 	['Your boat is caught in a rough sea storm', 'It become\'s broken', 'It breaks but your father buys you a better one', 30, 70, -6000, 6000, 0, 0],
 	['You\'re company is losing money', 'You must take a pay cut', 'You fire half your staff', 40, 60, -3000, 2000, 0, 0],
 	['The pills your company makes is contaminated', 'You have to throw them out', 'You sell them overseas', 70, 30, -4000, 4000, 0, 0],
-	['While at your country club you drink too much', 'You wake up naked in your office', 'You have a great time with fellow rich people', 30, 70, 0, 0 -3, 3],
+	['While at your country club you drink too much', 'You wake up naked in your office', 'You have a great time with fellow rich people', 30, 70, 0, 0, -3, 3],
 	['You become really sick', 'Money can\t solve everything', 'Money solves everything', 30, 70, 0, 0, -2, 3],
 	['You can\'t find anything new to wear', 'You have to stay home to hide you shame', 'You buy something overseas', 50, 50, -3000, 3000, 0, 0],
-	['Everything is boring so you decide to become an andrenaline junkie', 'You jump out from space and live', 'You die eating a jalapeno', 50, 50, 0, 0, -4, 4]
+	['Everything is boring so you decide to become an andrenaline junkie', 'You jump out from space and live', 'You die eating a jalapeno', 50, 50, 0, 0, -4, 4],
+	['Lobby for lower taxes for the rich and higher taxes for the poor', 'Not enough persuasion', 'You successfully hurt the economy', 30, 70, -2000, 10000, 0, 0],
+	['Invest in a company using insider trader knowledge', 'Fined but no jail time', 'You enjoy the money you made by buying rich people stuff', 20, 80, -2000, 6000, -2, 0],
+	['You are given the reins of the new series of Game Of Thrones', 'It\'s the worst season ever and you receive death threats', 'It\'s the best season ever', 60, 40, -100000, 100000, 0, 0],
+	['You create a coding bootcamp in NYC', 'No one attends', 'It becomes General Assemby', 30, 70, -5000, 5000, 0, 0],
+	['You steal an idea from a fellow student', 'It becomes Myspace', 'It becomes Facebook', 40, 60, -5000, 10000, 0, 0],
+	['You meet the president of the United States', 'He thinks your stupid', 'You can buy his influence', 20, 80, -3000, 10000, 0, 3],
+	['You find the cure for cancer', 'The goverment is making you give it for free', 'You can monetize it to your liking', 40, 60, -3000, 5000, 0, 0],
+	['You control the electricity in California', 'You are fined', 'You take billions from Californians', 50, 50, 4000, 4000, 0, 0],
+	['Your design a way for energy efficient plane', 'People steal your idea', 'You fly anywhere for no cost', 50, 50, 0, 0, -5, 5],
+	['You find a way to warp speed', 'You end up in a weird area with evil aliens', 'You travel without exerting energy', 50, 50, 0, 0, -4, 4]
+
 ];
 
 let nicknameButton = document.getElementById('nickname-button');
@@ -165,55 +161,6 @@ const showCharacters = (playerArray) => {
 	}
 }
 
-const setOpportunities = (classNum) => {
-	let arrayOfOppPosition = [];
-	let arrayOfEventPosition = [];
-	if (classNum === 0) {
-		for (let i = 0; arrayOfOppPosition.length < opportunityUArray.length; i++) {
-			let randomNum = Math.floor(Math.random() * 48) + 1;
-			if (!arrayOfOppPosition.includes(randomNum)) {
-				arrayOfOppPosition.push(randomNum);
-			}
-		}
-		for (let i = 0; arrayOfEventPosition.length < eventUArray.length; i++) {
-			let randomNum = Math.floor(Math.random() * 48) + 1;
-			if (!arrayOfPosition.includes(randomNum) && !arrayOfEventPosition.includes(randomNum)) {
-				arrayOfEventPosition.push(randomNum);
-			}
-		}
-		
-	} else if (classNum === 3) {
-		for (let i = 0; arrayOfOppPosition.length < 3; i++) {
-			let randomNum = Math.floor(Math.random() * 48) + 1;
-			if (!arrayOfOppPosition.includes(randomNum)) {
-				arrayOfOppPosition.push(randomNum);
-			}
-		}
-		for (let i = 0; arrayOfEventPosition.length < eventMLArray.length; i++) {
-			let randomNum = Math.floor(Math.random() * 48) + 1;
-			if (!arrayOfPosition.includes(randomNum) && !arrayOfEventPosition.includes(randomNum)) {
-				arrayOfEventPosition.push(randomNum);
-			}
-		}
-	} else if (classNum === 1 || classNum === 2) {
-		for (let i = 0; arrayOfOppPosition.length < opportunityMLArray.length; i++) {
-			let randomNum = Math.floor(Math.random() * 48) + 1;
-			if (!arrayOfOppPosition.includes(randomNum)) {
-				arrayOfOppPosition.push(randomNum);
-			}
-		}
-		for (let i = 0; arrayOfEventPosition.length < eventMLArray.length; i++) {
-			let randomNum = Math.floor(Math.random() * 48) + 1;
-			if (!arrayOfPosition.includes(randomNum) && !arrayOfEventPosition.includes(randomNum)) {
-				arrayOfEventPosition.push(randomNum);
-			}
-		}
-	}
-
-	arrayOfOppPosition.sort();
-	return arrayOfOppPosition;
-}
-
 const createGrid = () => {
 	let gridContainer = document.createElement('div');
 	gridContainer.classList.add('grid');
@@ -226,14 +173,9 @@ const createGrid = () => {
 		stepDivContainer.classList.add('step-div-container' + i);
 		characterBlock.appendChild(stepDivContainer);
 		let playerDiv = document.createElement('div');
-		playerDiv.setAttribute('id', 'player-div' + i)
-		let oppArray = setOpportunities(i);
+		playerDiv.setAttribute('id', 'player-div' + i);
 		for (let i = 0; i < 50; i++) {
 			let stepDiv = document.createElement('div');
-			if (oppArray.includes(i)) {
-				stepDiv.style.backgroundColor = '#FFD700';
-				stepDiv.classList.add('step-div-border');
-			}
 			if (i === 0) {
 				stepDiv.appendChild(playerDiv);
 			}
@@ -278,12 +220,16 @@ const movePlayer = (player) => {
 	}
 }
 
-const pickRandomEvent = (eventArray, player) => {
-	let randomIndex = Math.floor(Math.random() * eventArray.length);
+const pickRandomEvent = (player) => {
+	let eventArray;
 	let randomEvent;
 	if (player.economicClass === 'MiddleClass' || player.economicClass === 'LowerClass') {
+		eventArray = eventMLArray;
+		let randomIndex = Math.floor(Math.random() * eventArray.length);
 		randomEvent = eventArray[randomIndex];
 	} else {
+		eventArray = eventUArray;
+		let randomIndex = Math.floor(Math.random() * eventArray.length);
 		randomEvent = eventArray[randomIndex];
 	}
 
@@ -459,13 +405,10 @@ const playGame = () => {
 				collectForFinished(playerArray[0]);
 				choseButtonFunc();
 			} else {
-				chosenEvent = pickRandomEvent(eventMLArray, playerArray[0]);
+				chosenEvent = pickRandomEvent(playerArray[0]);
 				window.setTimeout(nextTurn, 500);
-				//nextTurn();
 				window.setTimeout(function () {
 					showEvent(chosenEvent)}, 1200);
-				//nextTurn();
-				//showEvent(chosenEvent);	
 			}
 		} else {
 			resetGame();
@@ -508,8 +451,3 @@ const playGame = () => {
 		rollButton.disabled = false;
 	});
 }
-
-let changeBgButton = document.getElementById('change-bg');
-changeBgButton.addEventListener('click', function() {
-	document.body.classList.toggle('background2');
-});

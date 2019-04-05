@@ -1,41 +1,10 @@
 body {
 
 	text-align: center;
-	/*font-family: 'Diplomata SC', cursive*/
-	/*font-family: 'Tangerine', cursive;*/
 	background-color: black;
-/*	background-image: url(background.png);*/
+	background-image: url(background.png);
 	background-size: cover;
 	font-family: 'Indie Flower', cursive;
-}
-
-.background1 {
-	background-image: url(background.png);
-}
-
-.background2 {
-	background-image: url(background1.png);
-}
-
-#change-bg {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	font-family: 'Indie Flower', cursive;
-	font-size: 20px;
-	width: 150px;
-	height: 50px;
-	border: 2px solid black;
-	border-radius: 10px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	background-color: #134611;
-	color: #96E072;
-}
-
-#change-bg:active {
-	background-color: #96E072;
-	color: #134611;
 }
 
 h1 {
@@ -61,13 +30,6 @@ button:focus {
 	display: none;
 	margin-top: 30px;
 }
-
-/*#characters-top-container {
-	position: absolute;
-	top: 0;
-	right: 0;
-
-}*/
 
 #roll-button {
 	font-family: 'Indie Flower', cursive;
@@ -96,17 +58,12 @@ button:focus {
 
 #nickname-button {
 	font-family: 'Indie Flower', cursive;
-	/*font-family: 'Tangerine', cursive;*/
 	text-align: center;
 	font-size: 20px;
 	width: 150px;
 	height: 50px;
 	border: 2px solid black;
 	border-radius: 10px;
-	/*border: 2px solid black;
-	border-radius: 3px;*/
-	/*background-color: #343A1A;
-	color: #E8FCCF;*/
 	background-color: #134611;
 	color: #96E072;
 	margin-top: 60px;
@@ -118,28 +75,8 @@ button:focus {
 }
 
 section {
-	/*display: none;*/
 	color: #E8FCCF;
 }
-
-/*section > h2 {
-	font-size: 100px;
-	color: #E8FCCF;
-	margin: 50px;
-
-}*/
-
-/*section > h3 {
-	position: absolute;
-	top: 0;
-	right: 0;
-	display: none;
-	margin-top: 20px;
-	margin-right: 20px;
-	margin-bottom: 0;
-	font-size: 30px;
-	color: #E8FCCF;
-}*/
 
 .input-wrapper {
 	margin-top: 30px;
@@ -159,7 +96,6 @@ div > input {
 
 div > input:focus {
 	background-color: #E0E0E0;
-	/*outline-color: #f4cb42;*/
 	outline: none;
 }
 
@@ -182,9 +118,6 @@ section > button:active {
 }
 
 .wrapper {
-	/*display: flex;
-	flex: row;
-	justify-content: center;*/
 	display: inline-block;
 	width: 100%;
 	font-size: 12px;
@@ -234,7 +167,6 @@ section > button:active {
 	height: 100px;
 	border: 4px dashed #137547;
 	border-radius: 10px;
-	/*border-bottom: 5px solid #137547;*/
 	margin: 100px 2px;
 	background-color: rgba(0, 0, 0, .5);
 }
@@ -284,7 +216,6 @@ section > button:active {
 }
 
 .modal-background {
- /* background-color: rgba(0, 0, 0, .2);*/
   position: fixed;
   left: 50%;
   top: 50%;
