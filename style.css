@@ -274,7 +274,7 @@ section > button:active {
 	margin: 0 auto;
 	width: 150px;
 	height: 50px;
-	margin-top: 500px;
+	margin-top: 400px;
 	border: 2px solid black;
 	border-radius: 10px;
 	font-size: 20px;
@@ -286,4 +286,17 @@ section > button:active {
 #event-roll-button:active {
 	background-color: #96E072;
 	color: #134611;
+}
+
+.popup-text {
+  animation: popup 1s infinite alternate;
+}
+
+@keyframes popup {
+	0% {
+    	font-size: 55px;
+    }
+    100% {
+    	font-size: 45px;
+    }
 }

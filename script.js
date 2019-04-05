@@ -396,10 +396,13 @@ const choseButtonFunc = () => {
 const playGame = () => {
 	document.querySelectorAll('.name-h3')[playerArray[0].order].style.color = '#8622b5';
 	document.querySelectorAll('.name-h3')[playerArray[0].order].style.fontSize = '50px';
+	document.querySelectorAll('.name-h3')[playerArray[0].order].setAttribute('class', 'name-h3 popup-text');
+
 	let chosenEvent;
 	let rollButton = document.getElementById('roll-button');
 	rollButton.addEventListener('click', function () {
 		rollButton.disabled = true;
+		document.querySelectorAll('.name-h3')[playerArray[0].order].classList.remove('popup-text');
 		if (!gameFinished) {
 			if (playerArray[0].finished) {
 				collectForFinished(playerArray[0]);
@@ -445,6 +448,7 @@ const playGame = () => {
 
 		document.querySelectorAll('.name-h3')[playerArray[0].order].style.color = '#8622b5';
 		document.querySelectorAll('.name-h3')[playerArray[0].order].style.fontSize = '50px';
+		document.querySelectorAll('.name-h3')[playerArray[0].order].setAttribute('class', 'name-h3 popup-text');
 
 		checkWinner();
 
